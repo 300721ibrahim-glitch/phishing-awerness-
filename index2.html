@@ -1,0 +1,29 @@
+<form id="form">
+  <input id="name" placeholder="Your Name" required>
+  <input id="email" type="email" placeholder="Your Email" required>
+  <textarea id="message" placeholder="Message"></textarea>
+  <button type="submit">Send</button>
+</form>
+
+<script>
+// 👉 Replace this with your actual Google Apps Script Web App URL
+const API = "https://script.google.com/macros/s/AKfycbz-IY4cUJ8OMZzg5EVSs_tfKx2rDhUz9Do80-4kykbpbR0_V9pbVl6piZpjqan3KMaRcg/exec";
+
+document.getElementById('form').addEventListener('submit', async (e)=>{
+  e.preventDefault();
+
+  const name = document.getElementById('name').value;
+  const email = document.getElementById('email').value;
+  const message = document.getElementById('message').value;
+
+  const res = await fetch(API, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"    // 👈 VERY IMPORTANT
+    },
+    body: JSON.stringify({ name, email, message })
+  });
+
+  alert("Saved!");
+});
+</script>
